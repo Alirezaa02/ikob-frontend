@@ -109,7 +109,7 @@
 
 
 
- /* header {
+ header {
   background: #2e8b57;
   color: #fff;
   padding: 10px 30px;
@@ -117,4 +117,116 @@
 .icon{
   opacity: 1.5;
  
-} */
+}
+
+/* Nav bar */
+
+nav ul li {
+  display: inline-block;
+ }
+
+ 
+ nav {
+  width: auto;
+  left: 0;
+  text-align: left;
+ }
+
+ nav ul {
+  list-style: none;
+  margin: 0;         
+  padding: 0;                    
+ }
+ nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 30px;
+  transition: 0.3s ease all;                                
+ }
+
+ nav ul li a:hover {
+  background: #d79231;                  
+}
+
+/* login & Register Nav */
+
+div.signin{
+  float:right;
+  text-align: center;
+}
+
+
+/* Register */
+
+.Register{
+ color: #d79231;
+ font-size: 20px;
+ font-weight: bold;
+ text-align: center;
+ margin: 80px;
+
+
+ button {
+  margin: 10px;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b36800;
+}
+
+input {
+  padding: 6px;
+  margin-bottom: 15px;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+}
+label {
+  padding: 5px;
+  font-weight: bold;
+}
+
+}
+
+/* Login */
+.Login{
+  color: #d79231;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 80px;
+  
+
+  button {
+    margin: 10px;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #b36800;
+  }
+  
+  input {
+    padding: 6px;
+    margin-bottom: 15px;
+    border: 3px solid #ccc;
+    border-radius: 10px;
+  }
+    .icon1{
+    text-align: center; 
+    margin-bottom: 2px;
+  }
+
+}
