@@ -36,3 +36,85 @@
     transform: rotate(360deg);
   }
 }
+
+/* New Code */
+
+* {
+  box-sizing: border-box;
+ }
+ 
+ html,
+ body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-size: 16px;
+  text-align: center;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+ }
+
+ /* Demo text with animation */
+.text{
+  margin-top: 250px;
+}
+
+:root {
+  --border-color-start: #ff8000;
+  --border-color-end: rgb(0, 247, 255);
+  --border-width: 15px;
+  --animation-duration: 5s;
+}
+
+@keyframes borderAnimation {
+
+  /* First part  */
+  0% {
+    transform: scale(1.5);
+    border-color: var(--border-color-start);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.1);
+    border-color: var(--border-color-end);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    border-color: var(--border-color-start);
+    opacity: 0.5;
+  }
+  75% {
+    transform: scale(1.1);
+    border-color: var(--border-color-end);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    border-color: var(--border-color-start);
+    opacity: 1;
+  }
+}
+
+.text-border-animation {
+  display: inline-block;
+  padding: 10px;
+  font-size: 24px;
+  position: relative;
+  border: var(--border-width) dotted var(--border-color-start);
+  animation: borderAnimation var(--animation-duration) ease-in-out infinite;
+  transition: border-color 0.8s ease;  /* smooth transition between colors */
+}
+
+
+
+
+ /* header {
+  background: #2e8b57;
+  color: #fff;
+  padding: 10px 30px;
+ }
+.icon{
+  opacity: 1.5;
+ 
+} */
