@@ -18,6 +18,7 @@ const Ikob = () => (
 🎉 Events • Meetups • Culture</h3>
       <p>Coming Soon...</p>
 
+  <button className="btn btn-primary">Start</button>
 
 </section>
 );
