@@ -13,6 +13,8 @@ import Header from "./components/Header";
 // Pages
 import Home from "./pages/Home";
 import Event from "./pages/Event";
+import About from "./pages/About"
+import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
@@ -26,6 +28,8 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Event" element={<Event />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Contact" element={<Contact />} />
         </Routes>
       </div>
     </BrowserRouter>

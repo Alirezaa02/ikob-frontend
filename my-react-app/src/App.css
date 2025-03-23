@@ -110,7 +110,7 @@
 
 
  header {
-  background: #2e8b57;
+  background: #ffffff;
   color: #fff;
   padding: 10px 30px;
  }
@@ -121,33 +121,55 @@
 
 /* Nav bar */
 
-nav ul li {
-  display: inline-block;
- }
-
- 
- nav {
+nav {
   width: auto;
   left: 0;
   text-align: left;
- }
+  background: #121212; /* Dark background */
+  padding: 15px 0;
+}
 
- nav ul {
+nav ul {
   list-style: none;
-  margin: 0;         
-  padding: 0;                    
- }
- nav ul li a {
-  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  color: #ddd; /* Light gray text */
   text-decoration: none;
   display: block;
   padding: 10px 15px;
   border-radius: 30px;
-  transition: 0.3s ease all;                                
- }
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s ease-in-out;
+}
 
- nav ul li a:hover {
-  background: #d79231;                  
+/* Neon hover effect */
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: #00e676; /* Neon green */
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  color: #00e676; /* Neon green text */
+}
+
+nav ul li a:hover::after {
+  transform: scaleX(1);
 }
 
 /* login & Register Nav */
