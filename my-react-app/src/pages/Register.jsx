@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Rpage = () => {
   const [formData, setFormData] = useState({
@@ -7,16 +8,18 @@ const Rpage = () => {
     password: '',
     confirmPassword: ''
   });
-  const [error, setError] = useState(null); // State to manage error messages
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null); // Success message state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Perform email validation
-    if (name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-      setError("Please enter a valid email address.");
-    } else {
-      setError(null);
+    if (name === 'email') {
+      if (!/\S+@\S+\.\S+/.test(value)) {
+        setError("Please enter a valid email address.");
+      } else {
+        setError(null);
+      }
     }
 
     setFormData(prevState => ({
@@ -27,46 +30,40 @@ const Rpage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(null);
 
-    const { email, password, confirmPassword } = formData;
+    const { username, email, password, confirmPassword } = formData;
 
-    if (!email || !password || !confirmPassword) {
-      setError("Please enter all fields.");
+    if (!username || !email || !password || !confirmPassword) {
+      setError("Please fill in all fields.");
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords are not match.");
+      setError("Passwords do not match.");
       return;
     }
 
     try {
-      const response = await fetch("http://4.237.58.241:3000/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }), 
+      const response = await axios.post("http://localhost:5001/user/register", {
+        username,
+        email,
+        password
       });
-      const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(
-          data.message || "An error occurred during registration."
-        );
-      }
-
-      console.log("Registration done:", data);
+      console.log("Registration successful:", response.data);
+      setSuccess("Registration successful! You can now log in.");
     } catch (err) {
-      setError(err.message || "Failed to register.");
+      setError(err.response?.data?.message || "Failed to register.");
     }
   };
 
   return (
-
     <div className='Register'>
       <h2>Register</h2>
-      {error && <p>{error}</p>} {/* Display error message if there's an error */}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>{success}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>

@@ -1,4 +1,3 @@
-
 export const setToken = (token) => {
     localStorage.setItem('jwtToken', token);
 };

@@ -1,48 +1,43 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { setToken } from '../components/authentication';
-
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // Access navigate function for redirection
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     if (!email || !password) {
-      setError("Please enter all fields.");
+      setError("Please enter both email and password.");
+      setLoading(false);
       return;
     }
 
     try {
-      const response = await fetch("http://4.237.58.241:3000/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+      const response = await axios.post(" http://localhost:5001/user/login", {
+        email,
+        password,
       });
 
-      if (!response.ok) {
-        // Handle login failure
-        const data = await response.json();
-        throw new Error(data.message || "An error occurred.");
+      console.log("Login Response:", response.data);
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/Event");
+      } else {
+        throw new Error("Invalid login response. No token received.");
       }
-
-      // Store JWT token in local storage upon successful login
-      const data = await response.json();
-      setToken(data.token);
-      // window.location.reload();
-      // Redirect to VolcanoList page after successful login
-      navigate("/VolcanoList");
-      window.location.reload();
-
     } catch (err) {
-      setError(err.message || "Failed to login.");
+      setError(err.response?.data?.message || "Failed to login.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,12 +49,12 @@ const Login = () => {
         </div>
         <h2>Login</h2>
         <form onSubmit={handleLogin} className="auth-form">
-          {error && <p className="error">{error}</p>}
+          {error && <p className="error" style={{ color: "red" }}>{error}</p>}
           <div>
             <label>Email:</label>
             <input
               type="email"
-              placeholder="email"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -69,13 +64,15 @@ const Login = () => {
             <label>Password:</label>
             <input
               type="password"
-              placeholder="password"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
       </div>
     </div>
